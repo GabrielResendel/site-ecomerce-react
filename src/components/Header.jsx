@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom'
 const Header = () => {
   return (
     <div className="Header">
-        <Link to="/src/pages/Home">
+        <Link to="/">
           <img src={logoGR} alt="Logo G&R" className='logo'/>
         </Link>
         
-        <Link to="/src/pages/Category" className="button_header">
+        <Link to="/Category" className="button_header">
           <ul>
             <li>CATEGORIA</li>
           </ul>
         </Link>
-        <Link to="/" className="button_header">
+        <Link to="/Oferta" className="button_header">
           <ul>
             <li>OFERTAS</li>
           </ul>
