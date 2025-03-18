@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import API_URL from "../config";
 
 const ItemView = () => {
   const { id } = useParams();
@@ -9,7 +10,7 @@ const ItemView = () => {
 
   useEffect(() => {
     // Buscar detalhes do produto
-    axios.get(`http://localhost:5005/api/produto/${id}`)
+    axios.get(`${API_URL}/produto/${id}`)
       .then(response => {
         setProduto(response.data);
       })
@@ -18,7 +19,7 @@ const ItemView = () => {
       });
 
     // Buscar todas as imagens do produto
-    axios.get(`http://localhost:5005/api/imagem/${id}`)
+    axios.get(`${API_URL}/imagem/${id}`)
       .then(response => {
         setImagens(response.data);
       })

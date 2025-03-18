@@ -65,6 +65,7 @@ a {
   color: #143329;
 }
 .SearchButton {
+  display: flex;
   width: 40px;
   height: 35px;
   border: 0px solid #143329;
@@ -76,4 +77,44 @@ a {
   font-size: 20px;
 }
 
+.category-card{
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction:column;
+  gap: 10px;
+}
+.categoria-imagem{
+  border-radius: 300px;
+  width: 180px;
+  height: 180px;
+  object-fit: contain; 
 
+}
+.grid_categoria{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+.grid_produto{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+.produto-card{
+  padding: 25px 16px;
+  display: flex;
+  align-items: center;
+  flex-direction:column;
+  gap: 10px;
+}
+.produto-imagem{
+  border-radius: 50px;
+  width: 300px;
+  height: 300px;
+  object-fit: contain; 
+}
+.Home{
+
+  text-align: center;
+  
+}

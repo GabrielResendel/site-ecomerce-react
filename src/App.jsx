@@ -1,7 +1,6 @@
 import Header from "./components/Header"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from "./pages/Home";
-import SingleItem from "./components/Singleitem"
 import Category from "./pages/Category";
 import ItemView from "./pages/ItemView";
 import Kart from "./pages/Kart"
