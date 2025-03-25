@@ -2,25 +2,40 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import API_URL from "../config";
-import Slider from "react-slick"; // Importando o react-slick
+import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 
 const ItemView = () => {
   const { id } = useParams();
   const [produto, setProduto] = useState(null);
   const [imagens, setImagens] = useState([]);
+  const [tamanhos, setTamanhos] = useState({});
+  const [tamanhoSelecionado, setTamanhoSelecionado] = useState(null);
 
   useEffect(() => {
-    axios.get(`${API_URL}/produto/${id}`)
-      .then(response => setProduto(response.data))
-      .catch(error => console.error("Erro ao buscar produto:", error));
+    // Buscar dados do produto
+    axios
+      .get(`${API_URL}/produto/${id}`)
+      .then((response) => setProduto(response.data))
+      .catch((error) => console.error("Erro ao buscar produto:", error));
 
-    axios.get(`${API_URL}/imagem/${id}`)
-      .then(response => setImagens(response.data))
-      .catch(error => console.error("Erro ao buscar imagens:", error));
+    // Buscar imagens do produto
+    axios
+      .get(`${API_URL}/imagem/${id}`)
+      .then((response) => setImagens(response.data))
+      .catch((error) => console.error("Erro ao buscar imagens:", error));
 
+    // Buscar tamanhos do produto
+    axios
+      .get(`${API_URL}/produtotamanho/${id}`)
+      .then((response) => {
+        console.log("Retorno da API de tamanhos:", response.data); // Teste no console
+        if (response.data.length > 0) {
+          setTamanhos(response.data[0]); // Pegando o primeiro item do array
+        }
+      })
+      .catch((error) => console.error("Erro ao buscar tamanhos:", error));
   }, [id]);
 
   if (!produto) return <p>Carregando...</p>;
@@ -31,7 +46,7 @@ const ItemView = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true
+    arrows: true,
   };
 
   return (
@@ -51,7 +66,58 @@ const ItemView = () => {
       <div className="product-details">
         <h1>{produto.nome}</h1>
         <p className="price">R$ {produto.preco.toFixed(2)}</p>
-        <button>ADICIONAR AO CARRINHO</button>
+
+        {/* Seleção de tamanhos */}
+        <div className="tamanhos-container">
+          {tamanhos.p > 0 && (
+            <button
+              className={`tamanho-btn ${
+                tamanhoSelecionado === "P" ? "selecionado" : ""
+              }`}
+              onClick={() => setTamanhoSelecionado("P")}
+            >
+              P
+            </button>
+          )}
+          {tamanhos.m > 0 && (
+            <button
+              className={`tamanho-btn ${
+                tamanhoSelecionado === "M" ? "selecionado" : ""
+              }`}
+              onClick={() => setTamanhoSelecionado("M")}
+            >
+              M
+            </button>
+          )}
+          {tamanhos.g > 0 && (
+            <button
+              className={`tamanho-btn ${
+                tamanhoSelecionado === "G" ? "selecionado" : ""
+              }`}
+              onClick={() => setTamanhoSelecionado("G")}
+            >
+              G
+            </button>
+          )}
+          {tamanhos.gg > 0 && (
+            <button
+              className={`tamanho-btn ${
+                tamanhoSelecionado === "GG" ? "selecionado" : ""
+              }`}
+              onClick={() => setTamanhoSelecionado("GG")}
+            >
+              GG
+            </button>
+          )}
+        </div>
+
+        {/* Botão de adicionar ao carrinho */}
+        <button disabled={!tamanhoSelecionado}>
+          {tamanhoSelecionado
+            ? `Adicionar  ao Carrinho`
+            : "Selecione um tamanho"}
+        </button>
+
         <p className="description">{produto.descricao}</p>
       </div>
     </div>
