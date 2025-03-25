@@ -118,3 +118,91 @@ a {
   text-align: center;
   
 }
+
+/* Estiliza as bolinhas da paginação */
+.swiper-pagination-bullet {
+  background-color: #143329 !important; /* Cor das bolinhas */
+  width: 12px;
+  height: 12px;
+  opacity: 1; /* Garante visibilidade */
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #143329 !important; /* Cor da bolinha ativa */
+}
+
+.item-view-container {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* Estilização do carrossel de imagens */
+.image-carousel {
+  flex: 1;
+  max-width: 600px;
+  border-radius: 30px;
+  
+}
+
+.image-carousel img {
+  width: 600px;
+  height: 600px;
+  border-radius: 30px;
+}
+
+/* Estilização dos detalhes do produto */
+.product-details {
+  flex: 1;
+  padding: 10px;
+}
+
+.product-details button{
+  display: flex;
+  align-items: center;
+  color: #f5f5f5;
+  background-color: #143329;
+  border-radius: 20px;
+  padding: 10px;
+  
+}
+
+
+.product-details h1 {
+  font-size: 30px;
+  color: #143329;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #f5831f;
+  margin-bottom: 15px;
+}
+
+.description {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+}
+.slick-prev:before,
+.slick-next:before {
+  color: #143329 !important; /* Mude para a cor desejada */
+  font-size: auto !important; /* Ajuste o tamanho da seta */
+}
+
+/* Cor das bolinhas (indicadores) */
+.slick-dots li button:before {
+  color: #143329 !important; /* Mude para a cor desejada */
+  font-size: 12px; /* Ajuste o tamanho da bolinha */
+}
+
+/* Cor da bolinha ativa */
+.slick-dots li.slick-active button:before {
+  color: #143329 !important; /* Cor diferente para a bolinha ativa */
+}
