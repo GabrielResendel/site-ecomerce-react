@@ -77,41 +77,66 @@ a {
   font-size: 20px;
 }
 
-.category-card{
-  padding: 10px;
+.grid_categoria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Melhora a responsividade */
+  gap: 20px; /* Aumenta o espaço entre os itens */
+  justify-content: center;
+  padding: 20px 10px;
+}
+
+/* Ajuste dos cards de categoria */
+.category-card {
+  padding: 15px;
   display: flex;
   align-items: center;
-  flex-direction:column;
+  flex-direction: column;
   gap: 10px;
-}
-.categoria-imagem{
-  border-radius: 300px;
-  width: 180px;
-  height: 180px;
-  object-fit: contain; 
-
-}
-.grid_categoria{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  transition: transform 0.2s ease-in-out; /* Efeito ao passar o mouse */
 }
 
-.grid_produto{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+.category-card:hover {
+  transform: scale(1.05); /* Efeito de destaque ao passar o mouse */
 }
+
+/* Imagens das categorias */
+.categoria-imagem {
+  border-radius: 50%; /* Garante que fique sempre redondo */
+  width: 150px;
+  height: 150px;
+  object-fit: cover; /* Mantém o aspecto da imagem sem distorcer */
+  border: 4px solid #2d3b32; /* Adiciona uma borda estilosa */
+  transition: border 0.3s ease-in-out;
+}
+
+.category-card:hover .categoria-imagem {
+  border: 4px solid #e67e22; /* Destaca a categoria ao passar o mouse */
+}
+
+/* Nome da categoria */
+.category-title {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  color: #2d3b32;
+}
+
+/* Linha de destaque no título */
+.category-title::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #e67e22;
+  margin: 5px auto 0;
+}
+
+
 .produto-card{
-  padding: 25px 16px;
   display: flex;
   align-items: center;
   flex-direction:column;
   gap: 10px;
-}
-.produto-imagem{
-  border-radius: 50px;
-  width: 300px;
-  height: 300px;
-  object-fit: contain; 
 }
 .Home{
 
@@ -192,7 +217,7 @@ a {
 }
 .slick-prev:before,
 .slick-next:before {
-  color: #143329 !important; /* Mude para a cor desejada */
+  color: #143329 !important; 
   font-size: auto !important; /* Ajuste o tamanho da seta */
 }
 
@@ -233,3 +258,95 @@ a {
   background-color: #f48b2e;
   color: #143329;
 }
+
+/* Estiliza o container da categoria */
+.category-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+/* Estiliza o título da categoria */
+.category-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  padding: 10px 0;
+}
+
+/* Estiliza o container dos produtos */
+.produtos-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Estiliza cada produto */
+.produto-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 15px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.produto-card:hover {
+  transform: scale(1.05);
+}
+
+/* Estiliza a imagem do produto */
+.produto-imagem {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Estiliza o nome do produto */
+.produto-card h3 {
+  font-size: 1.2rem;
+  color: #222;
+  margin-top: 10px;
+}
+
+/* Estiliza a categoria do produto */
+.categoria-produto {
+  font-size: 0.9rem !important;
+  color: #777 !important;
+  margin-top: 5px;
+}
+
+/* Estiliza o preço */
+.produto-card p {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ff6600;
+  margin-top: 5px;
+}
+
+/* Ajusta a margem geral para evitar que os produtos encostem na borda */
+.home-container {
+  max-width: 1500px;
+  margin: 40px auto; /* Ajuste maior no topo para separar do menu */
+  padding: 20px; /* Espaçamento interno */
+}
+
+/* Ajusta os produtos no home para não ficarem colados */
+.home-produtos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  justify-content: space-between; /* Ajusta o espaçamento */
+  gap: 20px; /* Distância entre os produtos */
+  margin-top: 20px;
+}
+
+/* Adiciona margem inferior para evitar que os produtos fiquem colados */
+.produto-card {
+  margin-bottom: 20px; 
+}
+
