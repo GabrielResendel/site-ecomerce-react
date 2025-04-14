@@ -6,6 +6,7 @@ import Category from "./pages/Category";
 import ItemView from "./pages/ItemView";
 import Kart from "./pages/Kart";
 import ItemCategory from "./pages/ItemCategory";
+import Footer from "./components/Footer";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState(""); // Estado para a pesquisa
@@ -20,6 +21,7 @@ function App() {
         <Route path="/itemview/:id" element={<ItemView />} />
         <Route path="/kart" element={<Kart />} />
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }

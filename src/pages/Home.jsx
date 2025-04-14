@@ -49,7 +49,7 @@ const Home = ({ searchQuery }) => {
         </div>
       </div>
       <div className="home-container">
-        <h1 className="category-title">Lista de Produtos</h1>
+        <h1 className="produto-title">Lista de Produtos</h1>
         <div className="home-produtos-container">
           {produtosFiltrados.length > 0 ? (
             produtosFiltrados.map((produto) => (

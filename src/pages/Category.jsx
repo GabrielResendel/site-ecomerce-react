@@ -38,7 +38,7 @@ const Category = () => {
 
   return (
     <div className="category-container">
-      <h2 className="category-title">{categoria ? categoria.nome : "Carregando categoria..."}</h2>
+      <h2 className="produto-title">{categoria ? categoria.nome : "Carregando categoria..."}</h2>
 
       <div className="produtos-container">
         {produtos.length > 0 ? (
