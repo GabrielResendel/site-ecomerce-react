@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import logoGR from "../assets/logoGR.png";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 const Header = ({ setSearchQuery }) => {
   const [query, setQuery] = useState("");
@@ -10,6 +12,11 @@ const Header = ({ setSearchQuery }) => {
     setQuery(value);
     setSearchQuery(value); // Envia a pesquisa para o Home
   };
+  const { cartItems } = useContext(CartContext);
+  const totalItens = cartItems.reduce(
+    (total, item) => total + item.quantidade,
+    0
+  );
 
   return (
     <div className="Header">
@@ -19,7 +26,13 @@ const Header = ({ setSearchQuery }) => {
           <img src={logoGR} alt="Logo G&R" className="logo" />
         </Link>
         <Link to="/Oferta" className="button_header">
-        <img width="25" height="25" src="https://img.icons8.com/ios/50/commercial--v1.png" alt="commercial--v1"/>&nbsp;Ofertas
+          <img
+            width="25"
+            height="25"
+            src="https://img.icons8.com/ios/50/commercial--v1.png"
+            alt="commercial--v1"
+          />
+          &nbsp;Ofertas
         </Link>
       </div>
 
@@ -34,7 +47,12 @@ const Header = ({ setSearchQuery }) => {
             onChange={handleSearch}
           />
           <button type="submit" className="SearchButton">
-          <img width="30" height="30" src="https://img.icons8.com/ios/50/search--v1.png" alt="search--v1"/>
+            <img
+              width="30"
+              height="30"
+              src="https://img.icons8.com/ios/50/search--v1.png"
+              alt="search--v1"
+            />
           </button>
         </div>
       </div>
@@ -43,8 +61,15 @@ const Header = ({ setSearchQuery }) => {
       <div className="header-right">
         <i className="fas fa-user"></i>
         <i className="fas fa-shopping-cart"></i>
-        <Link to="/Kart" className="button_header">
-        <img width="25" height="25" src="https://img.icons8.com/ios/50/shopping-cart--v1.png" alt="shopping-cart--v1"/>&nbsp;Carrinho
+        <Link to="/Cart" className="button_header cart-button">
+          <img
+            width="25"
+            height="25"
+            src="https://img.icons8.com/ios/50/shopping-cart--v1.png"
+            alt="shopping-cart--v1"
+          />
+          &nbsp;Carrinho
+          {totalItens > 0 && <span className="cart-badge">{totalItens}</span>}
         </Link>
         <a
           href="https://wa.me/5531999999999"
@@ -52,8 +77,23 @@ const Header = ({ setSearchQuery }) => {
           rel="noreferrer"
           className="button_header"
         >
-          <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/whatsapp.png" alt="whatsapp"/>&nbsp;Contato
+          <img
+            width="25"
+            height="25"
+            src="https://img.icons8.com/ios-glyphs/30/whatsapp.png"
+            alt="whatsapp"
+          />
+          &nbsp;Contato
         </a>
+        <Link to="/historico" className="button_header cart-button">
+          <img
+            width="25"
+            height="25"
+            src="https://img.icons8.com/ios/50/e-commerce.png"
+            alt="e-commerce"
+          />
+          &nbsp;Historico Pedidos
+        </Link>
       </div>
     </div>
   );

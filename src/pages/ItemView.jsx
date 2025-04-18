@@ -5,38 +5,94 @@ import API_URL from "../config";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { CartContext } from "../context/CartContext";
 
 const ItemView = () => {
+  const { addToCart } = React.useContext(CartContext);
   const { id } = useParams();
+
   const [produto, setProduto] = useState(null);
   const [imagens, setImagens] = useState([]);
+  const [coresDisponiveis, setCoresDisponiveis] = useState([]);
+  const [corSelecionada, setCorSelecionada] = useState(null);
+  const [imagensFiltradas, setImagensFiltradas] = useState([]);
   const [tamanhos, setTamanhos] = useState({});
   const [tamanhoSelecionado, setTamanhoSelecionado] = useState(null);
+  const [quantidade, setQuantidade] = useState(1);
 
   useEffect(() => {
-    // Buscar dados do produto
+    // Buscar produto
     axios
       .get(`${API_URL}/produto/${id}`)
-      .then((response) => setProduto(response.data))
-      .catch((error) => console.error("Erro ao buscar produto:", error));
+      .then((res) => setProduto(res.data))
+      .catch((err) => console.error("Erro ao buscar produto:", err));
 
-    // Buscar imagens do produto
+    // Buscar imagens
     axios
       .get(`${API_URL}/imagem/${id}`)
-      .then((response) => setImagens(response.data))
-      .catch((error) => console.error("Erro ao buscar imagens:", error));
+      .then((res) => {
+        setImagens(res.data);
+        const coresCompletas = res.data
+          .map((img) => img.cor)
+          .filter((cor) => cor && cor.id); // Garante que tenha cor válida
+        console.log(res.data);
+        // Remove duplicadas por ID
+        const coresUnicas = coresCompletas.filter(
+          (cor, index, self) => self.findIndex((c) => c.id === cor.id) === index
+        );
 
-    // Buscar tamanhos do produto
+        setCoresDisponiveis(coresUnicas);
+
+        // Se só tem uma cor, seleciona automaticamente
+        if (coresUnicas.length === 1) {
+          setCorSelecionada(coresUnicas[0]);
+        }
+
+        setCoresDisponiveis(coresUnicas);
+      })
+      .catch((err) => console.error("Erro ao buscar imagens:", err));
+
+    // Buscar tamanhos
     axios
       .get(`${API_URL}/produtotamanho/${id}`)
-      .then((response) => {
-        console.log("Retorno da API de tamanhos:", response.data); // Teste no console
-        if (response.data.length > 0) {
-          setTamanhos(response.data[0]); // Pegando o primeiro item do array
-        }
+      .then((res) => {
+        if (res.data.length > 0) setTamanhos(res.data[0]);
       })
-      .catch((error) => console.error("Erro ao buscar tamanhos:", error));
+      .catch((err) => console.error("Erro ao buscar tamanhos:", err));
   }, [id]);
+
+  useEffect(() => {
+    if (corSelecionada) {
+      const filtradas = imagens.filter(
+        (img) => img.cor && img.cor.id === corSelecionada.id
+      );
+      setImagensFiltradas(filtradas);
+    }
+  }, [corSelecionada, imagens]);
+
+  const handleAddToCart = () => {
+    const quantidadeDisponivel = getQuantidadeDisponivel();
+    if (quantidade > quantidadeDisponivel) {
+      alert("Quantidade excede o estoque disponível!");
+      return;
+    }
+
+    const item = {
+      id: produto.id,
+      nome: produto.nome,
+      preco: produto.preco,
+      tamanho: tamanhoSelecionado,
+      quantidade: parseInt(quantidade),
+      cor: corSelecionada?.nome || "",
+      imagem: imagensFiltradas[0]?.url || produto.capa,
+    };
+    addToCart(item);
+  };
+
+  const getQuantidadeDisponivel = () => {
+    if (!tamanhoSelecionado) return 0;
+    return tamanhos[tamanhoSelecionado.toLowerCase()] || 0;
+  };
 
   if (!produto) return <p>Carregando...</p>;
 
@@ -51,71 +107,103 @@ const ItemView = () => {
 
   return (
     <div className="item-view-container">
-      {/* Carrossel de imagens */}
+      {/* Carrossel */}
       <div className="image-carousel">
         <Slider {...settings}>
-          {imagens.map((imagem) => (
-            <div key={imagem.id}>
-              <img src={imagem.url} alt={`Imagem ${imagem.id}`} />
-            </div>
-          ))}
+          {(imagensFiltradas.length > 0 ? imagensFiltradas : imagens).map(
+            (imagem) => (
+              <div key={imagem.id}>
+                <img src={imagem.url} alt={`Imagem ${imagem.id}`} />
+              </div>
+            )
+          )}
         </Slider>
       </div>
 
-      {/* Informações do produto */}
       <div className="product-details">
         <h1>{produto.nome}</h1>
         <p className="price">R$ {produto.preco.toFixed(2)}</p>
 
-        {/* Seleção de tamanhos */}
+        {/* Seletor de Cores */}
+        {coresDisponiveis.length > 0 && (
+          <div className="cores-container">
+            <p>Selecione a cor:</p>
+            <div className="botoes-cor">
+              {coresDisponiveis.map((cor) => (
+                <div
+                  key={cor.id}
+                  className="cor-btn-wrapper"
+                  onClick={() => setCorSelecionada(cor)}
+                >
+                  <div
+                    className={`cor-btn ${
+                      corSelecionada?.id === cor.id ? "selecionada" : ""
+                    }`}
+                    style={{ backgroundColor: cor.hexaDec }}
+                  />
+                  <span className="cor-label">{cor.nome}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Tamanhos */}
         <div className="tamanhos-container">
-          {tamanhos.p > 0 && (
-            <button
-              className={`tamanho-btn ${
-                tamanhoSelecionado === "P" ? "selecionado" : ""
-              }`}
-              onClick={() => setTamanhoSelecionado("P")}
-            >
-              P
-            </button>
-          )}
-          {tamanhos.m > 0 && (
-            <button
-              className={`tamanho-btn ${
-                tamanhoSelecionado === "M" ? "selecionado" : ""
-              }`}
-              onClick={() => setTamanhoSelecionado("M")}
-            >
-              M
-            </button>
-          )}
-          {tamanhos.g > 0 && (
-            <button
-              className={`tamanho-btn ${
-                tamanhoSelecionado === "G" ? "selecionado" : ""
-              }`}
-              onClick={() => setTamanhoSelecionado("G")}
-            >
-              G
-            </button>
-          )}
-          {tamanhos.gg > 0 && (
-            <button
-              className={`tamanho-btn ${
-                tamanhoSelecionado === "GG" ? "selecionado" : ""
-              }`}
-              onClick={() => setTamanhoSelecionado("GG")}
-            >
-              GG
-            </button>
+          {["P", "M", "G", "GG"].map(
+            (t) =>
+              tamanhos[t.toLowerCase()] > 0 && (
+                <button
+                  key={t}
+                  className={`tamanho-btn ${
+                    tamanhoSelecionado === t ? "selecionado" : ""
+                  }`}
+                  onClick={() => setTamanhoSelecionado(t)}
+                >
+                  {t}
+                </button>
+              )
           )}
         </div>
 
-        {/* Botão de adicionar ao carrinho */}
-        <button disabled={!tamanhoSelecionado}>
-          {tamanhoSelecionado
-            ? `Adicionar  ao Carrinho`
-            : "Selecione um tamanho"}
+        {/* Quantidade */}
+        <div className="quantidade-container">
+          <label>Quantidade:</label>
+          <input
+            type="number"
+            min="1"
+            max={getQuantidadeDisponivel()}
+            value={quantidade}
+            onChange={(e) => {
+              const novaQuantidade = parseInt(e.target.value);
+              const estoque = getQuantidadeDisponivel();
+              if (!isNaN(novaQuantidade) && novaQuantidade <= estoque) {
+                setQuantidade(novaQuantidade);
+              }
+            }}
+            disabled={!tamanhoSelecionado}
+          />
+          {tamanhoSelecionado && (
+            <p className="estoque-info">
+              Disponível: {getQuantidadeDisponivel()} unidades
+            </p>
+          )}
+        </div>
+
+        {/* Botão */}
+        <button
+          onClick={handleAddToCart}
+          disabled={
+            !tamanhoSelecionado ||
+            !corSelecionada ||
+            quantidade > getQuantidadeDisponivel()
+          }
+        >
+          {!tamanhoSelecionado || !corSelecionada
+            ? "Selecione cor e tamanho"
+            : getQuantidadeDisponivel() === 0
+            ? "Indisponível"
+            : "Adicionar ao Carrinho"}
         </button>
 
         <p className="description">{produto.descricao}</p>
