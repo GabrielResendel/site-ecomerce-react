@@ -4,6 +4,7 @@ import Mcard from  "../assets/mastercard.png"
 import Visa from "../assets/visa.png"
 import { Link } from "react-router-dom";
 import LogoGR from "../assets/logoGR.png"
+import { CONTATO, EMAIL } from "../config";
 const Footer = () => {
   return (
     <footer className="footer">
@@ -21,8 +22,8 @@ const Footer = () => {
         {/* Entre em Contato */}
         <div className="footer-section">
           <h3>Entre em Contato</h3>
-          <Link to="">Email</Link>
-          <Link to="">Whatsapp</Link>
+          <Link to={`mailto:${EMAIL}`}>Email</Link>
+          <Link to={`https://wa.me/${CONTATO}`}>Whatsapp</Link>
           <p>Atendimento: Seg a sab, 9h às 18h</p>
         </div>
 

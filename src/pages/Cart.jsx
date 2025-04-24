@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
-import API_URL from "../config";
+import API_URL, { CONTATO } from "../config";
 
 const Cart = () => {
   const { cartItems, removeFromCart, totalItems, totalPrice, clearCart } =
@@ -96,7 +96,7 @@ const Cart = () => {
 
       // 📱 Verifica se é mobile ou desktop
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      const numeroLoja = "5531982593202";
+      const numeroLoja = {CONTATO};
 
       const linkWhatsapp = isMobile
         ? `https://wa.me/${numeroLoja}?text=${textoWhatsapp}`
@@ -121,7 +121,7 @@ const Cart = () => {
 
       clearCart();
       alert(
-        "Pedido realizado com sucesso! Você será redirecionado para o WhatsApp."
+        "Pedido realizado com sucesso! Você será redirecionado para o WhatsApp para finalizar o pedido. ATENÇÂO: envie a mensage programada, se não conseguir entraremos em contato pois o pedido ja esta salvo."
       );
 
       window.open(linkWhatsapp, "_blank");
