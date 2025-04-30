@@ -1,0 +1,31 @@
+.categoryCard {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s ease-in-out; /* Efeito ao passar o mouse */
+}
+
+.categoryCard h3 {
+  color: #ffffff;
+}
+
+.categoryCard:hover {
+  transform: scale(1.05); /* Efeito de destaque ao passar o mouse */
+}
+
+/* Imagens das categorias */
+.categoryImagem {
+  background-color: #143329;
+  border-radius: 50%; /* Garante que fique sempre redondo */
+  width: 100px;
+  height: 100px;
+  object-fit: cover; /* Mantém o aspecto da imagem sem distorcer */
+  border: 3px solid #ffffff; /* Adiciona uma borda estilosa */
+  transition: border 0.3s ease-in-out;
+}
+
+.categoryCard:hover .categoryImagem {
+  border: 4px solid #e67e22; /* Destaca a categoria ao passar o mouse */
+}

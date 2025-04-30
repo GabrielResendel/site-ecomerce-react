@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import SingleItem from "../components/SingleItem";
-import API_URL from "../config";
-import CategoryList from "../components/CategoryList";
-
+import SingleItem from "../../components/SingleItem/SingleItem";
+import API_URL from "../../config";
+import CategoryList from "../../components/CategoryList/CategoryList";
+import styles from "./Home.module.css";
 const Home = ({ searchQuery }) => {
   const [produtos, setProdutos] = useState([]);
   const [categorias, setCategorias] = useState([]);
@@ -39,18 +39,18 @@ const Home = ({ searchQuery }) => {
   });
 
   return (
-    <div className="Home">
+    <div className={styles.Home}>
       <div>
-        <h1 className="category-title">Explore as Categorias</h1>
-        <div className="grid_categoria">
+        <h1 className={styles.categoryTitle}>Explore as Categorias</h1>
+        <div className={styles.gridCategoria}>
           {categorias.map((categoria) => (
             <CategoryList key={categoria.id} categoria={categoria} />
           ))}
         </div>
       </div>
-      <div className="home-container">
-        <h1 className="produto-title">Lista de Produtos</h1>
-        <div className="home-produtos-container">
+      <div className={styles.homeContainer}>
+        <h1 className={styles.produtoTitle}>Lista de Produtos</h1>
+        <div className={styles.homeProdutosContainer}>
           {produtosFiltrados.length > 0 ? (
             produtosFiltrados.map((produto) => (
               <SingleItem

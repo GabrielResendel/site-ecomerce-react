@@ -1,0 +1,48 @@
+.historicoContainer {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.historicoContainer h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #143329;
+  text-align: center;
+}
+.pedidoCard {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-left: 4px solid #143329;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.pedidoCard:hover {
+  transform: translateY(-3px);
+}
+
+.pedidoCard p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #444;
+}
+
+.pedidoCard strong {
+  color: #000;
+}
+
+.pedidoCard ul {
+  margin-top: 15px;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.pedidoCard li {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}

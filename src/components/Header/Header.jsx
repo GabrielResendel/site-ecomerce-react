@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import logoGR from "../assets/logoGR.png";
+import logoGR from "../../assets/logoGR.png";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
-import { CONTATO } from "../config";
+import { CartContext } from "../../context/CartContext";
+import { CONTATO } from "../../config";
+import styles from "./Header.module.css";
 
 const Header = ({ setSearchQuery }) => {
   const [query, setQuery] = useState("");
@@ -20,25 +21,25 @@ const Header = ({ setSearchQuery }) => {
   );
 
   return (
-    <div className="Header">
+    <div className={styles.Header}>
       {/* ESQUERDA: Logo + Botão Ofertas */}
-      <div className="header-left">
+      <div className={styles.headerLeft}>
         <Link to="/">
-          <img src={logoGR} alt="Logo G&R" className="logo" />
+          <img src={logoGR} alt="Logo G&R" className={styles.logo} />
         </Link>
       </div>
 
       {/* CENTRO: Barra de pesquisa */}
-      <div className="header-center">
-        <div className="Search">
+      <div className={styles.headerCenter}>
+        <div className={styles.Search}>
           <input
             type="text"
-            className="Search-Term"
+            className={styles.SearchTerm}
             placeholder="Procure um Produto"
             value={query}
             onChange={handleSearch}
           />
-          <button type="submit" className="SearchButton">
+          <button type="submit" className={styles.SearchButton}>
             <img
               width="30"
               height="30"
@@ -50,10 +51,13 @@ const Header = ({ setSearchQuery }) => {
       </div>
 
       {/* DIREITA: Ícones + Contato */}
-      <div className="header-right">
-        <i className="fas fa-user"></i>
-        <i className="fas fa-shopping-cart"></i>
-        <Link to="/Cart" className="button_header cart-button">
+      <div className={styles.headerRight}>
+        <i className={styles.fasfauser}></i>
+        <i className={styles.fasfashoppingcart}></i>
+        <Link
+          to="/Cart"
+          className={`${styles.buttonHeader} ${styles.cartButton}`}
+        >
           <img
             width="25"
             height="25"
@@ -61,13 +65,15 @@ const Header = ({ setSearchQuery }) => {
             alt="shopping-cart--v1"
           />
           &nbsp;Carrinho
-          {totalItens > 0 && <span className="cart-badge">{totalItens}</span>}
+          {totalItens > 0 && (
+            <span className={styles.cartBadge}>{totalItens}</span>
+          )}
         </Link>
         <a
           href={`https://wa.me/${CONTATO}`}
           target="_blank"
           rel="noreferrer"
-          className="button_header"
+          className={styles.buttonHeader}
         >
           <img
             width="25"
@@ -77,7 +83,10 @@ const Header = ({ setSearchQuery }) => {
           />
           &nbsp;Contato
         </a>
-        <Link to="/historico" className="button_header cart-button">
+        <Link
+          to="/historico"
+          className={`${styles.buttonHeader} ${styles.cartButton}`}
+        >
           <img
             width="25"
             height="25"

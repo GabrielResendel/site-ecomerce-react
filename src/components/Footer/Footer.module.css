@@ -1,0 +1,48 @@
+.footer {
+  background-color: #143329;
+  color: #fff;
+  padding: 20px 20px 20px;
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 40px;
+  background-color: #143329;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.footerSection {
+  flex: 1;
+  min-width: 250px;
+  margin: 0 10px;
+}
+
+.footerSection h3 {
+  margin-bottom: 10px;
+  color: #ff6600;
+}
+
+.paymentIcons img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.footerBottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.footerSection a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.footerSection a:hover {
+  color: #ff6600;
+}

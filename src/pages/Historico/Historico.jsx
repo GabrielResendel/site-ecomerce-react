@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import styles from "./Historico.module.css";
 const Historico = () => {
   const [historico, setHistorico] = useState([]);
 
@@ -9,7 +9,7 @@ const Historico = () => {
   }, []);
 
   return (
-    <div className="historico-container">
+    <div className={styles.historicoContainer}>
       <h2>Histórico de Pedidos</h2>
       {historico.length === 0 ? (
         <p>Nenhum pedido foi feito ainda.</p>
@@ -18,7 +18,7 @@ const Historico = () => {
           .slice()
           .reverse()
           .map((pedido, index) => (
-            <div key={index} className="pedido-card">
+            <div key={index} className={styles.pedidoCard}>
               <p>
                 <strong>ID:</strong> {pedido.id}
               </p>

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
-import { CartContext } from "../context/CartContext";
-import API_URL, { CONTATO } from "../config";
+import { CartContext } from "../../context/CartContext";
+import API_URL, { CONTATO } from "../../config";
+import styles from "./Cart.module.css";
 
 const Cart = () => {
   const { cartItems, removeFromCart, totalItems, totalPrice, clearCart } =
@@ -96,7 +97,7 @@ const Cart = () => {
 
       // 📱 Verifica se é mobile ou desktop
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      const numeroLoja = {CONTATO};
+      const numeroLoja = { CONTATO };
 
       const linkWhatsapp = isMobile
         ? `https://wa.me/${numeroLoja}?text=${textoWhatsapp}`
@@ -132,20 +133,20 @@ const Cart = () => {
   };
 
   return (
-    <div className="cart-container">
+    <div className={styles.cartContainer}>
       <h2>Seu Carrinho</h2>
 
       {cartItems.length === 0 ? (
         <p>Seu carrinho está vazio.</p>
       ) : (
         <>
-          <ul className="cart-list">
+          <ul className={styles.cartList}>
             {cartItems.map((item, index) => (
-              <li key={index} className="cart-item">
+              <li key={index} className={styles.cartItem}>
                 <img
                   src={item.imagem}
                   alt={item.nome}
-                  className="cart-item-image"
+                  className={styles.cartItemImage}
                 />
                 <div>
                   <strong>{item.nome}</strong> - Tamanho: {item.tamanho}
@@ -156,7 +157,7 @@ const Cart = () => {
                   Preço: R$ {(item.preco * item.quantidade).toFixed(2)}
                 </div>
                 <button
-                  className="button-remove"
+                  className={styles.buttonRemove}
                   onClick={() =>
                     removeFromCart(item.id, item.tamanho, item.cor)
                   }
@@ -167,15 +168,15 @@ const Cart = () => {
             ))}
           </ul>
 
-          <div className="cart-summary">
+          <div className={styles.cartSummary}>
             <p>Total de Itens: {totalItems}</p>
             <p>Valor Total: R$ {totalPrice.toFixed(2)}</p>
 
-            <button className="button-cart" onClick={clearCart}>
+            <button className={styles.buttonCart} onClick={clearCart}>
               Limpar Carrinho
             </button>
             <button
-              className="button-cart"
+              className={styles.buttonCart}
               onClick={() => setMostrarFormulario(true)}
             >
               Finalizar Pedido
@@ -183,7 +184,7 @@ const Cart = () => {
           </div>
 
           {mostrarFormulario && (
-            <div className="formulario-pedido">
+            <div className={styles.formularioPedido}>
               <h3>Informações do Cliente</h3>
               <input
                 type="text"
@@ -211,7 +212,7 @@ const Cart = () => {
                 <option value="Cartão de Crédito">Cartão de Crédito</option>
                 <option value="Boleto Bancario">Boleto Bancario</option>
               </select>
-              <button className="button-cart" onClick={confirmarPedido}>
+              <button className={styles.buttonCart} onClick={confirmarPedido}>
                 Confirmar Pedido
               </button>
             </div>

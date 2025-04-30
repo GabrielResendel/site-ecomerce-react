@@ -1,0 +1,166 @@
+.itemViewVontainer {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+.imageCarousel {
+  flex: 1;
+  max-width: 600px;
+  border-radius: 30px;
+}
+
+.imageCarousel img {
+  width: 600px;
+  height: 600px;
+  border-radius: 30px;
+}
+
+.productDetails {
+  flex: 1;
+  padding: 10px;
+}
+
+.productDetails button {
+  display: flex;
+  align-items: center;
+  color: #f5f5f5;
+  background-color: #143329;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.productDetails h1 {
+  font-size: 30px;
+  color: #143329;
+  margin-bottom: 10px;
+}
+.price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #f5831f;
+  margin-bottom: 15px;
+}
+.botoesCor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.corBtnWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.corBtnWrapper:hover {
+  transform: scale(1.05);
+}
+
+.corBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid #ccc;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.selecionada {
+  border: 1px solid #143329;
+  box-shadow: 0 0 0 3px #143329;
+}
+
+.selecionada::after {
+  content: "✔";
+  color: #143329;
+  font-size: 16px;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.corLabel {
+  margin-top: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #143329;
+  text-align: center;
+}
+.tamanhosContainer {
+  display: flex;
+  gap: 10px; /* Espaço entre os botões */
+  margin: 15px 0; /* Espaçamento acima e abaixo */
+}
+.tamanhoBtn {
+  padding: 10px 15px;
+  border: 2px solid #000;
+  background-color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+.tamanhoBtn:hover {
+  background-color: #f48b2e;
+  color: #143329;
+}
+
+.tamanhoBtn.selecionado {
+  background-color: #f48b2e;
+  color: #143329;
+}
+.quantidadeContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.quantidadeContainer label {
+  font-weight: 500;
+}
+
+.quantidadeContainer input {
+  width: 60px;
+  padding: 6px 10px;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.quantidadeContainer input:focus {
+  border-color: #143329;
+}
+.estoqueInfo {
+  font-size: 14px;
+  color: #555;
+}
+.description {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+}
+.coresContainer {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.coresContainer p {
+  font-size: 16px;
+  font-weight: 600;
+  color: #143329;
+  margin-bottom: 12px;
+}

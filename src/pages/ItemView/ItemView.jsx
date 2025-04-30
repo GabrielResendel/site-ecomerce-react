@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import API_URL from "../config";
+import API_URL from "../../config";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { CartContext } from "../context/CartContext";
-
+import { CartContext } from "../../context/CartContext";
+import styles from "./ItemView.module.css";
 const ItemView = () => {
   const { addToCart } = React.useContext(CartContext);
   const { id } = useParams();
@@ -106,9 +106,9 @@ const ItemView = () => {
   };
 
   return (
-    <div className="item-view-container">
+    <div className={styles.itemViewVontainer}>
       {/* Carrossel */}
-      <div className="image-carousel">
+      <div className={styles.imageCarousel}>
         <Slider {...settings}>
           {(imagensFiltradas.length > 0 ? imagensFiltradas : imagens).map(
             (imagem) => (
@@ -120,28 +120,28 @@ const ItemView = () => {
         </Slider>
       </div>
 
-      <div className="product-details">
+      <div className={styles.productDetails}>
         <h1>{produto.nome}</h1>
-        <p className="price">R$ {produto.preco.toFixed(2)}</p>
+        <p className={styles.price}>R$ {produto.preco.toFixed(2)}</p>
 
         {/* Seletor de Cores */}
         {coresDisponiveis.length > 0 && (
-          <div className="cores-container">
+          <div className={styles.coresContainer}>
             <p>Selecione a cor:</p>
-            <div className="botoes-cor">
+            <div className={styles.botoesCor}>
               {coresDisponiveis.map((cor) => (
                 <div
                   key={cor.id}
-                  className="cor-btn-wrapper"
+                  className={styles.corBtnWrapper}
                   onClick={() => setCorSelecionada(cor)}
                 >
                   <div
-                    className={`cor-btn ${
-                      corSelecionada?.id === cor.id ? "selecionada" : ""
+                    className={`${styles.corBtn} ${
+                      corSelecionada?.id === cor.id ? styles.selecionada : ""
                     }`}
                     style={{ backgroundColor: cor.hexaDec }}
                   />
-                  <span className="cor-label">{cor.nome}</span>
+                  <span className={styles.corLabel}>{cor.nome}</span>
                 </div>
               ))}
             </div>
@@ -149,13 +149,13 @@ const ItemView = () => {
         )}
 
         {/* Tamanhos */}
-        <div className="tamanhos-container">
+        <div className={styles.tamanhosContainer}>
           {["P", "M", "G", "GG"].map(
             (t) =>
               tamanhos[t.toLowerCase()] > 0 && (
                 <button
                   key={t}
-                  className={`tamanho-btn ${
+                  className={`${styles.tamanhoBtn} ${
                     tamanhoSelecionado === t ? "selecionado" : ""
                   }`}
                   onClick={() => setTamanhoSelecionado(t)}
@@ -167,7 +167,7 @@ const ItemView = () => {
         </div>
 
         {/* Quantidade */}
-        <div className="quantidade-container">
+        <div className={styles.quantidadeContainer}>
           <label>Quantidade:</label>
           <input
             type="number"
@@ -184,7 +184,7 @@ const ItemView = () => {
             disabled={!tamanhoSelecionado}
           />
           {tamanhoSelecionado && (
-            <p className="estoque-info">
+            <p className={styles.estoqueInfo}>
               Disponível: {getQuantidadeDisponivel()} unidades
             </p>
           )}
@@ -206,7 +206,7 @@ const ItemView = () => {
             : "Adicionar ao Carrinho"}
         </button>
 
-        <p className="description">{produto.descricao}</p>
+        <p className={styles.description}>{produto.descricao}</p>
       </div>
     </div>
   );

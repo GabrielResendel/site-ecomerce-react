@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import SingleItem from "../components/SingleItem";
-import API_URL from "../config";
+import SingleItem from "../../components/SingleItem/SingleItem";
+import API_URL from "../../config";
+import styles from "./Category.module.css";
 
 const Category = () => {
   const { id } = useParams();
@@ -37,12 +38,20 @@ const Category = () => {
   }, [id]);
 
   return (
-    <div className="category-container">
-      <h2 className="produto-title">{categoria ? categoria.nome : "Carregando categoria..."}</h2>
+    <div className={styles.categoryContainer}>
+      <h2 className={styles.produtoTitle}>
+        {categoria ? categoria.nome : "Carregando categoria..."}
+      </h2>
 
-      <div className="produtos-container">
+      <div className={styles.produtosContainer}>
         {produtos.length > 0 ? (
-          produtos.map((produto) => <SingleItem key={produto.id} produto={produto} categorias={[categoria]} />)
+          produtos.map((produto) => (
+            <SingleItem
+              key={produto.id}
+              produto={produto}
+              categorias={[categoria]}
+            />
+          ))
         ) : (
           <p>Nenhum produto encontrado nesta categoria.</p>
         )}
