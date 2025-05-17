@@ -8,6 +8,8 @@ import Footer from "./components/Footer/Footer";
 import { CartProvider } from "./context/CartContext";
 import Historico from "./pages/Historico/Historico";
 import Header from "./components/Header/Header";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState(""); // Estado para a pesquisa

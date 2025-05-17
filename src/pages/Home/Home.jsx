@@ -40,8 +40,17 @@ const Home = ({ searchQuery }) => {
 
   return (
     <div className={styles.Home}>
-      <div>
+      <div className={styles.categorySection}>
         <h1 className={styles.categoryTitle}>Explore as Categorias</h1>
+
+        {/* Mostra carrossel apenas em mobile */}
+        <div className={styles.categoryCarousel}>
+          {categorias.map((categoria) => (
+            <CategoryList key={categoria.id} categoria={categoria} />
+          ))}
+        </div>
+
+        {/* Mostra grid em telas maiores */}
         <div className={styles.gridCategoria}>
           {categorias.map((categoria) => (
             <CategoryList key={categoria.id} categoria={categoria} />

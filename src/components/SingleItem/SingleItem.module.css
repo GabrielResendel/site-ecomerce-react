@@ -3,49 +3,48 @@
   border: 1px solid #ddd;
   border-radius: 20px;
   padding: 15px;
-  width: 250px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
   display: flex;
-  align-items: center;
   flex-direction: column;
   gap: 10px;
+
+  /* Responsividade */
+  width: 100%;
+  max-width: 250px;
+  min-width: 140px;
+  flex: 1 1 auto;
+  margin-bottom: 20px;
 }
 
 .produtoCard:hover {
   transform: scale(1.05);
 }
 
-/* Estiliza a imagem do produto */
 .produtoImagem {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
+  height: auto;
+  max-height: 180px;
+  object-fit: contain;
   border-radius: 8px;
 }
 
-/* Estiliza o nome do produto */
 .produtoCard h3 {
   font-size: 1.2rem;
   color: #222;
   margin-top: 10px;
 }
 
-/* Estiliza a categoria do produto */
 .categoriaProduto {
   font-size: 0.9rem !important;
   color: #777 !important;
   margin-top: 5px;
 }
 
-/* Estiliza o preço */
 .produtoCard p {
   font-size: 1rem;
   font-weight: bold;
   color: #ff6600;
   margin-top: 5px;
-}
-.produtoCard {
-  margin-bottom: 20px;
 }

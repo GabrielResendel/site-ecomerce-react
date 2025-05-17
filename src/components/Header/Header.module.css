@@ -5,6 +5,7 @@
   padding: 0 15px;
   height: auto;
   background-color: #143329;
+  flex-wrap: wrap;
 }
 
 /* LOGO + OFERTAS */
@@ -69,6 +70,7 @@
   display: flex;
   align-items: center;
   gap: 30px;
+  flex-wrap: wrap;
 }
 .headerRight i {
   font-size: 22px;
@@ -88,4 +90,55 @@
   padding: 2px 6px;
   border-radius: 50%;
   font-weight: bold;
+}
+
+/* ✅ RESPONSIVIDADE */
+@media (max-width: 768px) {
+  .Header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .headerLeft,
+  .headerCenter,
+  .headerRight {
+    width: 100%;
+    justify-content: center;
+    margin: 10px 0;
+  }
+
+  .logo {
+    height: 100px;
+  }
+
+  .Search {
+    margin-top: 0;
+    max-width: 100%;
+  }
+
+  .SearchTerm,
+  .SearchButton {
+    height: 45px;
+    font-size: 16px;
+  }
+
+  .buttonHeader {
+    margin-top: 0;
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+
+  .headerRight {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .headerRight .cartBadge {
+    top: -5px;
+    right: -5px;
+    font-size: 10px;
+  }
 }
